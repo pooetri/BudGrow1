@@ -17,7 +17,7 @@ function App() {
         <View>
             <View style={styles.headercard}>
                 <View style={styles.headerContent}>
-                    <Text style={styles.headingText}>Price Comparison</Text>
+                    <Text style={styles.headingText}> Price Comparison</Text>
                     <Icon name="cog" size={30} color="#00806C" style={styles.icon} />
                 </View>
             </View>

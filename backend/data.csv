@@ -1,4 +1,31 @@
-Nama Makanan,Merek,Harga,Berat Makanan
-Baby Corn,Brand A,5000,250g
-Corn,Brand B,3000,300g
-Eggplant,Brand C,7000,500g
+ID,Name,Brand,Price(Rp),Weight(Gram)
+1,Fried Chicken,KFC,25,200
+2,Pizza,Pizza Hut,50,300
+3,Spaghetti,Aglio e Olio,30,200
+4,Burger,McDonald's,20,150
+5,Sushi,Salmon Nigiri,40,100
+6,Ramen,Tonkotsu Ramen,35,300
+7,Steak,Ribeye Steak,100,200
+8,Salad,Caesar Salad,25,200
+9,Ice Cream,Haagen-Dazs,30,100
+10,Cake,Chocolate Cake,50,300
+11,Cookies,Oreo Cookies,20,100
+12,Chips,Potato Chips,15,100
+13,Chocolate,Dark Chocolate,30,100
+14,Candy,M&M's,20,100
+15,Soda,Coca-Cola,10,350
+16,Juice,Orange Juice,15,350
+17,Milk,Fresh Milk,10,1000
+18,Water,Mineral Water,5,500
+19,Coffee,Americano,20,250
+20,Tea,Green Tea,15,250
+21,Apple,Red Delicious,10,100
+22,Banana,Cavendish,5,100
+23,Orange,Mandarin,10,100
+24,Grapes,Seedless Grapes,20,250
+25,Strawberries,California Strawberries,30,250
+26,Carrots,Baby Carrots,15,250
+27,Broccoli,Florets Broccoli,20,250
+28,Lettuce,Green Leaf Lettuce,10,250
+29,Tomatoes,Cherry Tomatoes,20,250
+30,Potatoes,Russet Potatoes,15,500
