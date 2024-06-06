@@ -1,36 +1,61 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const csv = require('csv-parser');
-const cors = require('cors');
-
 const app = express();
-const PORT = process.env.PORT || 3000;
+const mysql = require('mysql');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-// Middleware untuk mengizinkan CORS
+// Gunakan middleware
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Baca data dari file CSV
-let foods = [];
-fs.createReadStream(path.join(__dirname, 'data.csv'))
-  .pipe(csv())
-  .on('data', (row) => {
-    foods.push(row);
-  })
-  .on('end', () => {
-    console.log('CSV file successfully processed');
-  });
-
-// Endpoint untuk pencarian data
-app.get('/search', (req, res) => {
-  const query = req.query.q.toLowerCase();
-  const results = foods.filter(food => 
-    food['Nama Makanan'].toLowerCase().includes(query) || 
-    food['Merek'].toLowerCase().includes(query)
-  );
-  res.json(results);
+// Buat koneksi ke database
+const db = mysql.createConnection({
+  host: '127.0.0.1',
+  user: 'root',
+  password: '',
+  database: 'budgroow'
 });
 
+// Menangani kesalahan koneksi
+db.connect(err => {
+  if (err) {
+    console.error('Database connection failed:', err.stack);
+    process.exit(1); // Keluar dari aplikasi jika koneksi gagal
+  }
+  console.log('Connected to database.');
+});
+
+// Endpoint untuk mengambil data produk berdasarkan groceryID
+app.get('/search', (req, res) => {
+  const searchKey = req.query.q;
+  const query = `
+    SELECT groceryName, brand, weight, groceryPrice
+    FROM GroceryItem
+    WHERE groceryName LIKE ?`;
+
+  db.query(query, [`%${searchKey}%`], (err, results) => {
+    if (err) {
+      console.error('Error fetching product:', err.stack);
+      res.status(500).json({ error: 'Error fetching product' });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// Penanganan rute yang tidak ditemukan
+app.use((req, res, next) => {
+  res.status(404).json({ error: 'Route not found' });
+});
+
+// Penanganan kesalahan umum
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something broke!' });
+});
+
+const PORT = process.env.PORT || 3010;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
