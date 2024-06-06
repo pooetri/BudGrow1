@@ -1,14 +1,17 @@
-import { Text, View, StyleSheet } from "react-native";
+import React from 'react';
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import AntDesign from 'react-native-vector-icons/AntDesign';
+import CompareScreen1 from './frontend/CompareScreen1';
 
-function CompareScreen1() {
+
+const App = () => {
+    const foodItems = ["Baby Corn", "Corn", "Eggplant"];
+
     return (
         <View>
             <View style={styles.headercard}>
                 <View style={styles.headerContent}>
-                    <Text style={styles.headingText}>mparison</Text>
+                    <Text style={styles.headingText}>Price Comparison</Text>
                     <Icon name="cog" size={30} color="#00806C" style={styles.icon} />
                 </View>
             </View>
@@ -22,18 +25,12 @@ function CompareScreen1() {
                 <Text style={styles.tulisanrecentlysearched}> Recently Searched</Text>
             </View>
             <View style={styles.containermakanan}>
-                <View style={[styles.cardmakanan, styles.searchbar]}>
-                    <Text style={styles.tulisanmakanan}>Baby Corn</Text>
-                    <Icon name="plus" size={20} color="#EFC645" style={styles.iconplus} />
-                </View>
-                <View style={[styles.cardmakanan, styles.searchbar]}>
-                    <Text style={styles.tulisanmakanan}>Corn</Text>
-                    <Icon name="plus" size={20} color="#EFC645" style={styles.iconplus} />
-                </View>
-                <View style={[styles.cardmakanan, styles.searchbar]}>
-                    <Text style={styles.tulisanmakanan}>Eggplant</Text>
-                    <Icon name="plus" size={20} color="#EFC645" style={styles.iconplus} />
-                </View>
+                {foodItems.map((item, index) => (
+                        <TouchableOpacity key={index} style={[styles.cardmakanan, styles.searchbar]} onPress={styles.cardmakanan}>
+                            <Text style={styles.tulisanmakanan}>{item}</Text>
+                            <Icon name="plus" size={20} color="#EFC645" style={styles.iconplus} />
+                        </TouchableOpacity>
+                ))}
             </View>
         </View>
     );
@@ -64,12 +61,13 @@ const styles = StyleSheet.create({
     },
     iconplus: {
         marginRight: 10,
+        flexDirection: 'row'
     },
     tulisanrecentlysearched: {
         fontSize: 22,
         fontWeight: 'medium',
         color: '#000000',
-        marginBottom:10
+        marginBottom: 10
     },
     tulisanmakanan: {
         fontSize: 20,
@@ -119,4 +117,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CompareScreen1;
+export default App;
